@@ -2,7 +2,8 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "pg-promise": "^11.4.3"
   },
   "name": "abrnoc",
   "version": "1.0.0",
