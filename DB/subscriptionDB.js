@@ -18,6 +18,14 @@ const getSubscriptionFromDB = async (name) => {
     );
 }
 
+const updateIsActiveToDB = async (name, new_value) => {
+    console.log(new_value)
+    return db.one("UPDATE SUBSCRIPTION SET is_active = ($1) WHERE name = ($2) RETURNING *",
+        [
+            new_value, name
+        ]);
+}
 
 
-module.exports = { insertSubscriptionToDB, getSubscriptionFromDB}
+
+module.exports = { insertSubscriptionToDB, getSubscriptionFromDB, updateIsActiveToDB}
