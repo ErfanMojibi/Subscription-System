@@ -17,7 +17,8 @@ CREATE TABLE if not exists CUSTOMER_SUBSCRIPTION(
     end_date TIMESTAMP NOT NULL,
     is_active BOOLEAN NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customer (id),
-    FOREIGN KEY (subscription_name) REFERENCES Subscription (name)
+    FOREIGN KEY (subscription_name) REFERENCES Subscription (name),
+    UNIQUE(customer_id, subscription_name)
 );
 
 CREATE TABLE if not exists INVOICE(
