@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const subscriptionController = require('../controller/subscriptionController');
+const {createSubscription} = require('../controller/subscriptionController');
 
-
+router.post('/create', createSubscription);
 module.exports = router;

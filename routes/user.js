@@ -4,8 +4,14 @@ const {createUser, getUser, increaseCredit} = require('../controller/userControl
 
 
 
+
 router.post('/create', createUser);
 router.get('/get', getUser);
-router.post('/increase_credit', increaseCredit)
+router.post('/increase_credit', increaseCredit);
+
+router.get('/', (req, res) => {
+    res.send("endpoints: /create, /get, /increase_credit");
+})
+
 
 module.exports = router;
