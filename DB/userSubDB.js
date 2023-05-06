@@ -13,6 +13,19 @@ const insertSubscriptionForUserToDB = (customer_id, subs_name, end_date, ) => {
     );
 }
 
+const updateIsActiveToDB = async (customer_id, subscription_name, new_value) => {
+    return db.one("UPDATE CUSTOMER_SUBSCRIPTION SET is_active = ($1) WHERE subscription_name = ($2) and customer_id = ($3) RETURNING *",
+        [
+            new_value, subscription_name, customer_id
+        ]);
+}
+
+const getUserSubFromDB = async (customer_id, subscription_name) => {
+    return db.one("SELECT * FROM CUSTOMER_SUBSCRIPTION WHERE customer_id = ($1) and subscription_name = ($2)",
+        [
+            customer_id, subscription_name
+        ]);
+}
 
 
-module.exports = {insertSubscriptionForUserToDB}
+module.exports = {insertSubscriptionForUserToDB, updateIsActiveToDB, getUserSubFromDB}

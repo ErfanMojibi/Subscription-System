@@ -15,7 +15,7 @@ CREATE TABLE if not exists CUSTOMER_SUBSCRIPTION(
     subscription_name VARCHAR (50) NOT NULL,
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP NOT NULL,
-    is_active BOOLEAN NOT NULL,
+    is_active BOOLEAN NOT NULL
     FOREIGN KEY (customer_id) REFERENCES Customer (id),
     FOREIGN KEY (subscription_name) REFERENCES Subscription (name),
     UNIQUE(customer_id, subscription_name)
