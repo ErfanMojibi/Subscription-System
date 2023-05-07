@@ -35,15 +35,15 @@ There are 2 routes in this project:
     * `/get?id=...`: GET. to get user with id.
     * `/invoices?user_id=...`: GET. to get user invoices with id.
     * `/subscriptions?user_id=...`: GET. to get user subscriptions with id.
-    * `/`: to see endpoints.
+    * `/`: GET. to see endpoints.
 
 
 2. `/subscription`
-    * `/create`: to create subscription in db. body parameters in json format: `name`, `price`
-    * `/buy_subscription`: to buy subscription for a user. body parameters in json format: `user_id`, `subscription_name`, `end_date`.
-    * `/activate`: to activate user subscription. body parameters in json format: `user_id`, `subscription_name`
-    * `/deactivate`: to deactivate user subscription. body parameters in json format: `user_id`, `subscription_name`
-    * `/`: to see endpoints.
+    * `/create`: POST. to create subscription in db. body parameters in json format: `name`, `price`
+    * `/buy_subscription`: POST. to buy subscription for a user. body parameters in json format: `user_id`, `subscription_name`, `end_date`.
+    * `/activate`: POST. to activate user subscription. body parameters in json format: `user_id`, `subscription_name`
+    * `/deactivate`: POST. to deactivate user subscription. body parameters in json format: `user_id`, `subscription_name`
+    * `/`: GET. to see endpoints.
 
 </font>
 
