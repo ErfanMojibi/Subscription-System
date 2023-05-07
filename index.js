@@ -20,6 +20,6 @@ app.get('/', (req, res) => {
     res.send("endpoints: /user, /subscription");
 });
 
-app.listen(process.env.LISTEN_PORT | 3000, () => {
-    console.log("server is listening on port :)");    
+app.listen(process.env.LISTEN_PORT, () => {
+    console.log(`server is listening on port ${process.env.LISTEN_PORT}`);    
 });

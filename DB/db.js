@@ -9,5 +9,12 @@ const cn = {
   password: process.env.DB_PASSWORD,
 };
 const db = pgp(cn);
-
+db.connect()
+    .then(obj => {
+        console.log("Connected to PostgreSQL database.");
+        obj.done(); // release the connection back to the pool
+    })
+    .catch(error => {
+        console.error("Error connecting to PostgreSQL database.", error.message);
+    });
 module.exports = db;
