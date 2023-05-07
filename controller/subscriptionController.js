@@ -4,6 +4,8 @@ const { insertSubscriptionForUserToDB, updateIsActiveToDB, getUserSubFromDB } = 
 const { insertInvoiceToDB } = require("../DB/invoiceDB");
 const parse = require("postgres-date");
 
+const timers = new Map();
+
 const { TaskTimer } = require("tasktimer");
 const TIME_INTERVAL = 60 * 1000 * 1;
 const createSubscription = (req, res) => {
@@ -59,6 +61,7 @@ const activateSubscription = (req, res) => {
                 const price = (await getSubscriptionFromDB(subs_name)).price;
                 
                 const timer = new TaskTimer(TIME_INTERVAL);
+                
                 // schedule job for each TIME_INTERVAL
                 timer.add([
                     {
@@ -73,17 +76,14 @@ const activateSubscription = (req, res) => {
                                     updateIsActiveToDB(user_id, subs_name, false);
                                 } else {
                                     insertInvoiceToDB(user_id, subs_name, start_date, end_date, credit - price).catch(err => {
-                                        console.log(err);
-                                        console.log("error!");
+                                        console.log("error!: ",err);
                                     }); // insert invoice
 
                                     start_date = end_date;
-                                    console.log(credit, price);
                                     updateCreditToDB(user_id, credit - price); // deposit cash
                                 }
                             }).catch(err => {
-                                console.log(err);
-                                console.log("error");
+                                console.log("error: ", err);
                                 timer.stop();
                                 updateIsActiveToDB(user_id, subs_name, false);
                             });
@@ -93,6 +93,8 @@ const activateSubscription = (req, res) => {
                 ]);
                 
                 timer.start();
+
+                timers.set(user_id+subs_name, timer);
                 
                 res.status(200).json({
                     message: "Activated successfully",
@@ -110,5 +112,20 @@ const activateSubscription = (req, res) => {
 }
 
 
+const deactiveSubscription = (req, res) => {
+    const user_id = req.body.user_id;
+    const subs_name = req.body.subscription_name;
+    updateIsActiveToDB(user_id, subs_name, false).then(data => {
+        timers[user_id+subs_name].stop();
+        res.status(200).json({
+            message: "Deactivated successfuly"
+        });
+    }).catch(err => {
+        res.status(500).json({
+            message: "Failed to deactivate"
+        });
+    });
+}
 
-module.exports = { createSubscription, buySubscription, activateSubscription }
+
+module.exports = { createSubscription, buySubscription, activateSubscription, deactiveSubscription }
