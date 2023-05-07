@@ -1,5 +1,6 @@
 const {insertUserToDB, getUserFromDB, updateCreditToDB} = require("../DB/userDB");
 const {getUserInvoicesFromDB} = require("../DB/invoiceDB");
+const { getUserSubcriptionsFromDB } = require("../DB/userSubDB");
 
 const createUser = (req, res) => {
     const username = req.body.username;
@@ -68,4 +69,17 @@ const getUserInvoices = (req, res) => {
     });
 }
 
-module.exports = { createUser, getUser, increaseCredit, getUserInvoices }
+const getUserSubsriptions = (req, res) => {
+    const id = req.query.user_id;
+    getUserSubcriptionsFromDB(id).then(data => {
+        res.status(200).json({
+            message: "Got subscriptions",
+            data: data
+        }).catch(err => {
+            res.status(500).json({
+                message: "Failed to get subscriptions"
+            });
+        });
+    });
+}
+module.exports = { createUser, getUser, increaseCredit, getUserInvoices, getUserSubsriptions }
