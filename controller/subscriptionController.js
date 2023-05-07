@@ -2,7 +2,6 @@ const { insertSubscriptionToDB, getSubscriptionFromDB } = require("../DB/subscri
 const { updateCreditToDB, getUserFromDB } = require("../DB/userDB");
 const { insertSubscriptionForUserToDB, updateIsActiveToDB, getUserSubFromDB } = require("../DB/userSubDB");
 const { insertInvoiceToDB } = require("../DB/invoiceDB");
-const parse = require("postgres-date");
 
 const timers = new Map();
 
@@ -29,8 +28,6 @@ const buySubscription = (req, res) => {
     const user_id = req.body.user_id;
     const subs_name = req.body.subscription_name;
     const end_date = req.body.end_date;
-    console.log(end_date)
-    console.log(new Date());
     insertSubscriptionForUserToDB(user_id, subs_name, end_date).then(data => {
         res.status(200).json({
             message: "Bouught subscription.",
@@ -75,7 +72,7 @@ const activateSubscription = (req, res) => {
                                     timer.stop();
                                     updateIsActiveToDB(user_id, subs_name, false);
                                 } else {
-                                    insertInvoiceToDB(user_id, subs_name, start_date, end_date, credit - price).catch(err => {
+                                    insertInvoiceToDB(user_id, subs_name, start_date, end_date, price).catch(err => {
                                         console.log("error!: ",err);
                                     }); // insert invoice
 
@@ -116,11 +113,12 @@ const deactiveSubscription = (req, res) => {
     const user_id = req.body.user_id;
     const subs_name = req.body.subscription_name;
     updateIsActiveToDB(user_id, subs_name, false).then(data => {
-        timers[user_id+subs_name].stop();
+        timers.get(user_id+subs_name).stop();
         res.status(200).json({
             message: "Deactivated successfuly"
         });
     }).catch(err => {
+        console.log(err);
         res.status(500).json({
             message: "Failed to deactivate"
         });

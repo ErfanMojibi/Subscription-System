@@ -17,7 +17,6 @@ const getUserFromDB = async (id) => {
     );
 }
 const updateCreditToDB = async (id, new_value) => {
-    console.log(new_value)
     return db.one("UPDATE CUSTOMER SET credit = ($1) WHERE id = ($2) RETURNING credit",
         [
             new_value,

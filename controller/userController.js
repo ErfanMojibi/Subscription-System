@@ -26,6 +26,7 @@ const getUser = async (req, res) => {
             data: data
         })
     }).catch(err => {
+        console.log(err);
         res.status(500).json({
             message: "Failed to get user",
         })
@@ -43,11 +44,13 @@ const increaseCredit = (req, res) => {
                 data: data
             })
         }).catch(err => {
+            console.log(err);
             res.status(500).json({
                 message: "Failed to update credit",
             })
         })
     }).catch(err => {
+        console.log(err);
         res.status(500).json({
             message: "Failed to update credit",
         })
@@ -63,6 +66,7 @@ const getUserInvoices = (req, res) => {
             data: data
         });
     }).catch(err => {
+        console.log(err);
         res.status(500).json({
             message: "Failed to get user invoices"
         });
@@ -75,11 +79,12 @@ const getUserSubsriptions = (req, res) => {
         res.status(200).json({
             message: "Got subscriptions",
             data: data
-        }).catch(err => {
-            res.status(500).json({
-                message: "Failed to get subscriptions"
-            });
+        })
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            message: "Failed to get subscriptions"
         });
-    });
+    });;
 }
 module.exports = { createUser, getUser, increaseCredit, getUserInvoices, getUserSubsriptions }
