@@ -9,4 +9,13 @@ const insertInvoiceToDB = (customer_id, subscription_name, start_date, end_date,
     );
 }
 
-module.exports = { insertInvoiceToDB }
+const getUserInvoicesFromDB = (id) => {
+    return db.any(
+        "SELECT * FROM INVOICE where customer_id = ($1)",
+        [
+            id, 
+        ]
+    );
+}
+
+module.exports = { insertInvoiceToDB, getUserInvoicesFromDB }

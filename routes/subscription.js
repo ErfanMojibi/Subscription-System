@@ -4,5 +4,6 @@ const {createSubscription, buySubscription, activateSubscription} = require("../
 
 router.post('/create', createSubscription);
 router.post('/buy', buySubscription);
-router.post('/activate', activateSubscription)
+router.post('/activate', activateSubscription);
+
 module.exports = router;

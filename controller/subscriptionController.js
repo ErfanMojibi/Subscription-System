@@ -111,7 +111,4 @@ const activateSubscription = (req, res) => {
 
 
 
-const getInvoices = (req, res) => {
-    
-}
 module.exports = { createSubscription, buySubscription, activateSubscription }
