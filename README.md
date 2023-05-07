@@ -7,7 +7,7 @@ abrNOC internship task: subscription system
 # Setup
 <font size=3>
 
-you need 3 main steps to run the proejct:
+you need 4 main steps to run the proejct:
 1. make a postgresql database and run `DB/tables.sql` to create needed tables.
    
 2. make a `.env` file in root project directory inclucing following content:
