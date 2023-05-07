@@ -48,5 +48,9 @@ There are 2 routes in this project:
 </font>
 
 <font size=3>
-more detailed information can be found in abrNOC.postman_collection.json file which can be imported to POSTMAN and makes testing easy!
+More detailed information and examples can be found in abrNOC.postman_collection.json file which can be imported to POSTMAN and makes testing easy! you need to just import it and set BASE_URL environment variable to test apis.
+</font>
+
+<font size=4>
+Due to limited details provided in task doc, some assumptions were made to make project easier and faster to implement.
 </font>
