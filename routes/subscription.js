@@ -5,5 +5,9 @@ const {createSubscription, buySubscription, activateSubscription, deactiveSubscr
 router.post('/create', createSubscription);
 router.post('/buy', buySubscription);
 router.post('/activate', activateSubscription);
-router.post('/deactivate', deactiveSubscription)
+router.post('/deactivate', deactiveSubscription);
+
+router.get('/', (req, res) => {
+    res.send("endpoints: /create, /buy, /activate, /deactivate");
+})
 module.exports = router;
